@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import '../App.css';
 import WeatherInfo from './WeatherInfo';
 
 function Weather() {
-    const apiKey = 'ae6257cd3baf23fe635e78fd6aa6d702';
-    const [searchQuery, setSearchQuery] = useState();
+    const apiKey = 'ecf07367ad26b3ab3716f250f847bab6';
+    const [searchQuery, setSearchQuery] = useState('');
     const [weatherData, setWeatherData] = useState({
         city: null,
         temp: null,
@@ -19,7 +19,7 @@ function Weather() {
     function getWeather() {
         fetch(`https://api.openweathermap.org/data/2.5/weather?q=${searchQuery}&appid=${apiKey}`)
         .then(response => response.json())
-        .then(data => console.log(data))
+        // .then(data => console.log(data))
         .then(data => setWeatherData({
             city: data.name,
             temp: kelvinToFahrenheit(data.main.temp),
