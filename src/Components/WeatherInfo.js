@@ -1,26 +1,40 @@
 import React from 'react';
+import moment from 'moment';
 import '../App.css';
 
 function WeatherInfo(props) {
-    const { city, country, tempF, tempC, humidity, desc, sunrise, sunset, timeDiff} = props.data;
+    const { city, country, tempF, humidity, desc, sunrise, sunset, icon, timeDiff} = props.data;
+
+    function getLocalTime() {
+        return moment.utc().add(timeDiff, 's').format("LT")
+    }
+
+    // setInterval(() => {
+    //     getLocalTime()
+    //   }, 1000);
 
     return(
         <React.Fragment>
-            <div>
-              <p>Location: {city}, {country}</p>
+            <div className="weather-desc">
+              Local time: {setInterval(() => {getLocalTime()}, 1000)}
+              <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} />
+              {desc}
             </div>
-            <div>
-              <p>Description: {desc}</p>
-            </div>
-            <div>
-              <p>Temperature: {tempF} &deg;F  /  {tempC} &deg;C</p>
-            </div>
-            <div>
-              <p>Humidity: {humidity}%</p>
-            </div>
-            <div>
-              <p>Sunrise: {sunrise}</p>
-              <p>Sunset: {sunset}</p>
+            <div className="weather-info-inner">
+                <div className="weather-labels">
+                    <p>Location: </p>
+                    <p>Temperature: </p>
+                    <p>Humidity: </p>
+                    <p>Sunrise: </p>
+                    <p>Sunset: </p>
+                </div>
+                <div className="weather-values">
+                    <p>{city}, {country}</p>
+                    <p>{tempF} &deg;F</p>
+                    <p>{humidity}%</p>
+                    <p>{sunrise}</p>
+                    <p>{sunset}</p>
+                </div>
             </div>
         </React.Fragment> 
 

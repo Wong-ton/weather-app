@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../App.css';
 import WeatherInfo from './WeatherInfo';
 import moment from 'moment';
 
@@ -14,7 +13,9 @@ function Weather() {
         desc: null,
         sunrise: null,
         sunset: null,
-        timeDiff: null
+        timeDiff: null,
+        icon: null,
+        dataList: null,
     });
 
     function updateSearchQuery(e) {
@@ -32,6 +33,7 @@ function Weather() {
             humidity: data.main.humidity,
             desc: data.weather[0].description,
             timeDiff: data.timezone,
+            icon: data.weather[0].icon,
             sunrise: timezoneAdjust(data.sys.sunrise, data.timezone),
             sunset: timezoneAdjust(data.sys.sunset, data.timezone),
         }))
@@ -49,23 +51,23 @@ function Weather() {
         return moment.utc(new Date(unix * 1000 + (timeDiff * 1000)).toUTCString()).format("LT")
     }
 
+
     return(
         <div className="weather-container">
-          <h2>Weather</h2>
-            <section>
+            <div className="weather-header">
                 <input 
                 className="search-input"
-                placeholder="Enter City"
+                placeholder="Enter City (e.g. Los Angeles, US)"
                 onChange={updateSearchQuery}
                 />
-                <button onClick={getWeather}>Search</button>
-            </section>
-            <section className="weather-info">
+                <i class="fas fa-search" onClick={getWeather}></i>
+            </div>
+            <div className="weather-info">
               {weatherData.temp === null ?
-              (<p>No weather to display</p>) :
+              (<p>No weather to display. <br/>Enter a city.</p>) :
                 <WeatherInfo data={weatherData}/>
-            }
-            </section>
+              }
+            </div>
         </div>
     )
 }
