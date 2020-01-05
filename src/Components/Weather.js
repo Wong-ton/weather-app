@@ -3,7 +3,7 @@ import WeatherInfo from './WeatherInfo';
 import moment from 'moment';
 
 function Weather() {
-    const apiKey = 'ecf07367ad26b3ab3716f250f847bab6';
+    const apiKey = process.env.OMW_API_KEY
     const [searchQuery, setSearchQuery] = useState('');
     const [weatherData, setWeatherData] = useState({
         default: 'No weather to display.',
