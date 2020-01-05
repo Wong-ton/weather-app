@@ -8,7 +8,8 @@ A web application that displays current weather conditions (temperature, weather
 
 
 >If an invalid city is entered, an error message will be displayed to let the user know.
-![](/pubic/weather-app-screenshot-2.png)
+
+![](/public/weather-app-screenshot-2.png)
 
 
 ### Built With
