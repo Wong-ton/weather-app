@@ -5,7 +5,12 @@ import moment from 'moment';
 function Weather() {
     const apiKey = 'ecf07367ad26b3ab3716f250f847bab6';
     const [searchQuery, setSearchQuery] = useState('');
+    const [status, setStatus] = useState({
+        error: null
+    })
     const [weatherData, setWeatherData] = useState({
+        default: 'No weather to display. Please enter a city.',
+        error: null,
         city: null,
         country: null,
         temp: null,
@@ -24,19 +29,29 @@ function Weather() {
 
     function getWeather() {
         fetch(`https://api.openweathermap.org/data/2.5/weather?q=${searchQuery}&appid=${apiKey}`)
-        .then(response => response.json())
-        .then(data => setWeatherData({
-            city: data.name,
-            country: data.sys.country,
-            tempF: kelvinToFahrenheit(data.main.temp),
-            tempC: kelvinToCelsius(data.main.temp),
-            humidity: data.main.humidity,
-            desc: data.weather[0].description,
-            timeDiff: data.timezone,
-            icon: data.weather[0].icon,
-            sunrise: timezoneAdjust(data.sys.sunrise, data.timezone),
-            sunset: timezoneAdjust(data.sys.sunset, data.timezone),
-        }))
+        .then(response => {
+            if (response.status === 200) {
+                response.json()
+                .then(data => setWeatherData({
+                    city: data.name,
+                    country: data.sys.country,
+                    tempF: kelvinToFahrenheit(data.main.temp),
+                    tempC: kelvinToCelsius(data.main.temp),
+                    humidity: data.main.humidity,
+                    desc: data.weather[0].description,
+                    timeDiff: data.timezone,
+                    icon: data.weather[0].icon,
+                    sunrise: timezoneAdjust(data.sys.sunrise, data.timezone),
+                    sunset: timezoneAdjust(data.sys.sunset, data.timezone),
+                    error: null,
+                }))
+            }
+            else {
+                setWeatherData({
+                    error: 'Invalid entry, please try again.'
+                })
+            }
+        })
     }
 
     function kelvinToFahrenheit(kelvin) {
@@ -51,6 +66,17 @@ function Weather() {
         return moment.utc(new Date(unix * 1000 + (timeDiff * 1000)).toUTCString()).format("LT")
     }
 
+    function statusMessage() {
+        if (weatherData.error != null) {
+            return weatherData.error
+        }
+        else if (weatherData.city == null) {
+            return weatherData.default
+        } 
+        else if (weatherData.city != null) {
+            return <WeatherInfo data={weatherData}/>
+        }
+    }
 
     return(
         <div className="weather-container">
@@ -63,10 +89,7 @@ function Weather() {
                 <i class="fas fa-search" onClick={getWeather}></i>
             </div>
             <div className="weather-info">
-              {weatherData.temp === null ?
-              (<p>No weather to display. <br/>Enter a city.</p>) :
-                <WeatherInfo data={weatherData}/>
-              }
+                {statusMessage()}
             </div>
         </div>
     )

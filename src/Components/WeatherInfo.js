@@ -16,7 +16,7 @@ function WeatherInfo(props) {
     return(
         <React.Fragment>
             <div className="weather-desc">
-              Local time: {setInterval(() => {getLocalTime()}, 1000)}
+              Local time: {getLocalTime()}
               <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} />
               {desc}
             </div>
