@@ -1,17 +1,5 @@
 @import './variables';
-
-@mixin flexCenter {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-@mixin theme($light-theme: true) {
-    @if $light-theme {
-        background: lighten($primary-color, 100%);
-        color: darken($text-color, 100%);
-    }
-}
+@import './config';
 
 body {
     background: url("https://images.unsplash.com/photo-1460411794035-42aac080490a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80");
@@ -92,7 +80,19 @@ body {
     font-weight: 700;
 }
 
-
 .light {
     @include theme($light-theme: true);
+}
+
+@include mobile {
+    body {
+        background-size: auto;
+    }
+    .weather-container {
+        border-radius: 50px;
+        margin: 75px 30px;
+    }
+    // .weather-values {
+    //     margin: 10px;
+    // }
 }

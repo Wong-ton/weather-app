@@ -110,4 +110,14 @@ body {
   background: white;
   color: black;
 }
+
+@media screen and (min-width: 350px) {
+  body {
+    background-size: auto;
+  }
+  .weather-container {
+    border-radius: 50px;
+    margin: 75px 30px;
+  }
+}
 /*# sourceMappingURL=main.css.map */

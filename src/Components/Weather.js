@@ -5,9 +5,6 @@ import moment from 'moment';
 function Weather() {
     const apiKey = 'ecf07367ad26b3ab3716f250f847bab6';
     const [searchQuery, setSearchQuery] = useState('');
-    const [status, setStatus] = useState({
-        error: null
-    })
     const [weatherData, setWeatherData] = useState({
         default: 'No weather to display. Please enter a city.',
         error: null,
