@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import WeatherInfo from './WeatherInfo';
 import moment from 'moment';
 
+
 function Weather() {
-    const apiKey = process.env.OMW_API_KEY
+    const apiKey = process.env.REACT_APP_OWM_API_KEY;
     const [searchQuery, setSearchQuery] = useState('');
     const [weatherData, setWeatherData] = useState({
         default: 'No weather to display.',
