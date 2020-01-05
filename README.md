@@ -2,7 +2,7 @@
 A web application that displays current weather conditions (temperature, weather description, humidity, sunrise and sunset times) in a city.
 
 ### App link
-[Links](localhost)
+[https://wong-ton.github.io/weather-app/](https://wong-ton.github.io/weather-app/)
 
 ![](/public/weather-app-screenshot-1.png)
 
