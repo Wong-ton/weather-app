@@ -111,13 +111,31 @@ body {
   color: black;
 }
 
-@media screen and (min-width: 350px) {
+@media screen and (max-width: 450px) {
   body {
     background-size: auto;
   }
   .weather-container {
     border-radius: 50px;
     margin: 75px 30px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  body {
+    background-size: auto;
+    font-size: 2rem;
+  }
+  .weather-container {
+    width: 1000px;
+    height: 1000px;
+    font-size: 2rem;
+  }
+  .weather-container .weather-header {
+    margin: 100px 70px;
+  }
+  .weather-container .weather-header .search-input {
+    font-size: 2rem;
   }
 }
 /*# sourceMappingURL=main.css.map */

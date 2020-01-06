@@ -93,3 +93,23 @@ body {
         margin: 75px 30px;
     }
 }
+
+@include desktop {
+    body {
+        background-size: auto;
+        font-size: 2rem;
+    }
+    .weather-container {
+        width: 1000px;
+        height: 1000px;
+        font-size: 2rem;
+        
+        .weather-header {
+            margin: 100px 70px;
+            
+            .search-input {
+                font-size: 2rem;
+            }
+        }
+    }
+}
